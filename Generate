@@ -1,0 +1,35 @@
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+def generate_linear_data(num_samples, slope, intercept, noise_std):
+    x = np.random.rand(num_samples, 1)
+    y = slope * x + intercept + np.random.normal(0, noise_std, (num_samples, 1))
+    return x, y
+
+def train_linear_regression(x, y):
+    model = LinearRegression()
+    model.fit(x, y)
+    return model
+
+def visualize_linear_regression(x, y, model):
+    plt.scatter(x, y, color='blue', label='Actual')
+    plt.plot(x, model.predict(x), color='red', label='Predicted')
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Linear Regression')
+    plt.legend()
+    plt.show()
+
+if __name__ == "__main__":
+
+    num_samples = 100
+    slope = 2.5
+    intercept = 1.0
+    noise_std = 1.0
+    x, y = generate_linear_data(num_samples, slope, intercept, noise_std)
+
+
+    model = train_linear_regression(x, y)
+
+    visualize_linear_regression(x, y, model)
